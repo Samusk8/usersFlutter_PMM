@@ -246,11 +246,11 @@ void initState() {
         child: Text('Enviar'),
         onPressed: () {
           final Person _persona1 = Person(nombre: _nombre, apellido: _apellido, edad: _fecha, email: _email, contrasena: _password);
-          if (_nombre == null){
-            Navigator.pop(context, _persona1);
+          if (_nombre == ""){
 
-          } else {
             Navigator.pop(context, _persona);
+          } else {
+            Navigator.pop(context, _persona1);
           }
         },
       ),
