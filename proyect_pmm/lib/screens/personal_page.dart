@@ -22,14 +22,14 @@ class _PersonalPageState extends State<PersonalPage> {
   late Person _persona;
 
   TextEditingController _nombreCtrl = TextEditingController();
-  TextEditingController _apellidoCtrl = TextEditingController();
+  TextEditingController _edadCtrl = TextEditingController();
   TextEditingController _emailCtrl = TextEditingController();
 
 @override
 void initState() {
   super.initState();
   _nombreCtrl = TextEditingController();
-  _apellidoCtrl = TextEditingController();
+  _edadCtrl = TextEditingController();
   _emailCtrl = TextEditingController();
 }
 
@@ -41,6 +41,10 @@ void initState() {
 
     if (args != null && args is Person){
       _persona = args;
+      _nombreCtrl.text = _persona.nombre;
+      //_edadCtrl.text = _persona.edad;  //no puedo meterle edad
+      _emailCtrl.text = _persona.email;
+      
       print("Persona111111 ${_persona.toString()}");
 
     }
@@ -83,6 +87,7 @@ void initState() {
   _crearNombre() {
     return TextField(
       //autofocus: true,
+      controller: _nombreCtrl,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
         counter: Text('Letras ${_nombre.length}'),
@@ -153,6 +158,7 @@ void initState() {
   _crearEmail() {
     return TextField(
       //autofocus: true,
+      controller: _emailCtrl,
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         
