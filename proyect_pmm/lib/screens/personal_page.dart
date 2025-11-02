@@ -12,11 +12,12 @@ class PersonalPage extends StatefulWidget {
 class _PersonalPageState extends State<PersonalPage> {
   
   String _nombre = '';
+  String _apellido = '';
   String _email = '';
   String _fecha = '';
   String _pais = 'España';
+  String _password = '';
   TextEditingController _inputFieldFechaController =TextEditingController();
-  List<String> _paises = ['Andorra','Inglaterra','Dinamarca','España','Francia'];
 
 
   @override
@@ -24,7 +25,176 @@ class _PersonalPageState extends State<PersonalPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Samuel Jiménez"),
+
       ),
+      body: ListView(
+        padding: EdgeInsets.symmetric(
+          horizontal: 10,
+          vertical: 20,
+        ),
+        children: [
+          _crearNombre(),
+          Divider(),
+          _crearApellido(),
+          Divider(),
+          _crearFecha(context),
+          Divider(),
+          _crearEmail(),
+          Divider(),
+          _crearPassword(),
+          Divider(),
+          _crearPersona()
+        ],
+      ),
+    );
+  }
+
+  
+  _crearNombre() {
+    return TextField(
+      //autofocus: true,
+      textCapitalization: TextCapitalization.sentences,
+      decoration: InputDecoration(
+        counter: Text('Letras ${_nombre.length}'),
+        hintText: 'Nombre del Usuario',
+        labelText: 'Nombre',
+        helperText: 'Escriba su nombre',
+        suffixIcon: Icon(Icons.accessibility),
+        icon: Icon(Icons.account_circle),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20)
+        )
+        
+      ),
+      onChanged: (value) {
+        setState(() {
+          _nombre = value;
+          print(_nombre);
+        });
+      },
+    );
+  }
+
+  _crearApellido() {
+    return TextField(
+      //autofocus: true,
+      textCapitalization: TextCapitalization.sentences,
+      decoration: InputDecoration(
+        counter: Text('Letras ${_apellido.length}'),
+        hintText: 'Apellido del Usuario',
+        labelText: 'Apellido',
+        helperText: 'Escriba su apellido',
+        suffixIcon: Icon(Icons.accessibility),
+        icon: Icon(Icons.account_circle),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20)
+        )
+        
+      ),
+      onChanged: (value) {
+        setState(() {
+          _apellido = value;
+          print(_apellido);
+        });
+      },
+    );
+  }
+
+  _crearFecha(BuildContext context) {
+    return TextField(
+      enableInteractiveSelection: false,
+      controller: _inputFieldFechaController,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20)
+        ),
+        hintText: 'Fecha de nacimiento',
+        labelText: 'Fecha de nacimiento',
+        suffixIcon: Icon(Icons.perm_contact_calendar),
+        icon: Icon(Icons.calendar_today)
+      ),
+      onTap: () {
+        FocusScope.of(context).requestFocus(new FocusNode());
+        _seleccionaFecha(context);
+      },
+    );
+  }
+  
+  _crearEmail() {
+    return TextField(
+      //autofocus: true,
+      keyboardType: TextInputType.emailAddress,
+      decoration: InputDecoration(
+        
+        hintText: 'Correo Electronico',
+        labelText: 'Correo',
+        //helperText: 'Escriba el Correo completo',
+        suffixIcon: Icon(Icons.alternate_email),
+        icon: Icon(Icons.email),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20)
+        )
+        
+      ),
+      onChanged: (value) {
+        setState(() {
+          _email = value;
+          print(_email);
+        });
+      },
+    );
+  }
+
+  _crearPassword() {
+    return TextField(
+      //autofocus: true,
+      obscureText: true,
+      decoration: InputDecoration(
+        
+        hintText: 'Password',
+        labelText: 'Password',
+        suffixIcon: Icon(Icons.lock_open),
+        icon: Icon(Icons.lock),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20)
+        )
+        
+      ),
+      onChanged: (value) {
+        setState(() {
+          _password = value;
+          print(_password);
+        });
+      },
+    );
+  }
+
+
+  void _seleccionaFecha(BuildContext context) async {
+    DateTime? picked = await showDatePicker(
+      context: context,
+      //locale: Locale('es','Es'),
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2020),
+      lastDate: DateTime(2030)
+    );
+    if (picked != null){
+      setState((){
+        _fecha = picked.toString();
+        _inputFieldFechaController.text = _fecha;
+      }
+    );
+   }
+
+    
+  }
+
+
+  _crearPersona() {
+    return ListTile(
+      title: Text('Nombre: ${_nombre +' '+ _apellido} '),
+      subtitle: Text('Correo: $_email'),
+      trailing: Text(_fecha),
     );
   }
 
