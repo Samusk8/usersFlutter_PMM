@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyect_pmm/objects/person.dart';
 
 //Stateful widget porque voy a mostrar los cambios de la persona
 //en tiempo real
@@ -11,13 +12,39 @@ class PersonalPage extends StatefulWidget {
 
 class _PersonalPageState extends State<PersonalPage> {
   
+  
   String _nombre = '';
   String _apellido = '';
   String _email = '';
   String _fecha = '';
-  String _pais = 'España';
   String _password = '';
   TextEditingController _inputFieldFechaController =TextEditingController();
+  late Person _persona;
+
+  TextEditingController _nombreCtrl = TextEditingController();
+  TextEditingController _apellidoCtrl = TextEditingController();
+  TextEditingController _emailCtrl = TextEditingController();
+
+@override
+void initState() {
+  super.initState();
+  _nombreCtrl = TextEditingController();
+  _apellidoCtrl = TextEditingController();
+  _emailCtrl = TextEditingController();
+}
+
+  @override
+  void didChangeDependencies(){
+    super.didChangeDependencies();
+
+    final args = ModalRoute.of(context)?.settings.arguments;
+
+    if (args != null && args is Person){
+      _persona = args;
+      print("Persona111111 ${_persona.toString()}");
+
+    }
+  }
 
 
   @override
@@ -43,7 +70,10 @@ class _PersonalPageState extends State<PersonalPage> {
           Divider(),
           _crearPassword(),
           Divider(),
-          _crearPersona()
+          _crearPersona(),
+          Divider(),
+          _enviar(),
+
         ],
       ),
     );
@@ -195,6 +225,18 @@ class _PersonalPageState extends State<PersonalPage> {
       title: Text('Nombre: ${_nombre +' '+ _apellido} '),
       subtitle: Text('Correo: $_email'),
       trailing: Text(_fecha),
+    );
+  }
+
+  _enviar(){
+    return Container(
+      child: ElevatedButton(
+        child: Text('Enviar'),
+        onPressed: () {
+          
+          Navigator.pop(context, _persona);
+        },
+      ),
     );
   }
 

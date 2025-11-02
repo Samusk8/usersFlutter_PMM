@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyect_pmm/objects/person.dart';
 
 
 // He creado un Stateful Widget porque
@@ -11,6 +12,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  final List<Person> _personas = [];
+
+  @override
+  void initState(){
+    super.initState;
+    print("PERSONASSSSSS  $_personas");
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,23 +28,36 @@ class _HomePageState extends State<HomePage> {
         title: Text("PF1"),
       ),
       body: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Column(
           children: [
-            ElevatedButton(
-              child: Text('personal'),
-              onPressed: () {
-                Navigator.pushNamed(context,'personal');
-              
-              }, 
-              
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  child: Text('personal'),
+                  onPressed: () async {
+                    final Person persona = Person(nombre: 'Samuel', edad: 19, email: 'Samuel@gmail.com');
+                    final respuesta = await Navigator.pushNamed(context,'personal', arguments: persona);
+                    if (respuesta != null && respuesta is Person){
+                      setState(() {
+                        _personas.add(respuesta);
+                      });
+                    }
+                  }, 
+
+                  
+                ),
+                Padding(padding: EdgeInsetsGeometry.all(15)),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'widget');
+                  }, 
+                  child: Text('Widgets')
+                ),
+              ],
             ),
-            Padding(padding: EdgeInsetsGeometry.all(15)),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, 'widget');
-              }, 
-              child: Text('Widgets')
+            Column(
+
             ),
           ],
         ),
