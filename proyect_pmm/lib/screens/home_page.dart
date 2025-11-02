@@ -41,6 +41,7 @@ class _HomePageState extends State<HomePage> {
                     if (respuesta != null && respuesta is Person){
                       setState(() {
                         _personas.add(respuesta);
+                        print('lista de personas  $_personas');
                       });
                     }
                   }, 
