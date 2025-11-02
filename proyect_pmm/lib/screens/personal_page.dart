@@ -23,7 +23,6 @@ class _PersonalPageState extends State<PersonalPage> {
 
   TextEditingController _nombreCtrl = TextEditingController();
   TextEditingController _apellidoCtrl = TextEditingController();
-  TextEditingController _edadCtrl = TextEditingController();
   TextEditingController _emailCtrl = TextEditingController();
   TextEditingController _contrasenaCtrl = TextEditingController();
   
@@ -33,7 +32,6 @@ void initState() {
   super.initState();
   _nombreCtrl = TextEditingController();
   _apellidoCtrl = TextEditingController();
-  _edadCtrl = TextEditingController();
   _emailCtrl = TextEditingController();
   _contrasenaCtrl = TextEditingController();
 }
@@ -48,7 +46,6 @@ void initState() {
       _persona = args;
       _nombreCtrl.text = _persona.nombre;
       _apellidoCtrl.text = _persona.apellido;
-      //_edadCtrl.text = _persona.edad;  //no puedo meterle edad
       _emailCtrl.text = _persona.email;
       _contrasenaCtrl.text = _persona.contrasena;
       
@@ -248,8 +245,13 @@ void initState() {
       child: ElevatedButton(
         child: Text('Enviar'),
         onPressed: () {
-          
-          Navigator.pop(context, _persona);
+          final Person _persona1 = Person(nombre: _nombre, apellido: _apellido, edad: _fecha, email: _email, contrasena: _password);
+          if (_nombre == null){
+            Navigator.pop(context, _persona1);
+
+          } else {
+            Navigator.pop(context, _persona);
+          }
         },
       ),
     );

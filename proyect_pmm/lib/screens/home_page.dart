@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
                 ElevatedButton(
                   child: Text('personal'),
                   onPressed: () async {
-                    final Person persona = Person(nombre: 'Samuel', apellido: 'Jiménez', edad: 19, email: 'Samuel@gmail.com', contrasena: '1234abc');
+                    final Person persona = Person(nombre: 'Samuel', apellido: 'Jiménez', edad: '', email: 'Samuel@gmail.com', contrasena: '1234abc');
                     final respuesta = await Navigator.pushNamed(context,'personal', arguments: persona);
                     if (respuesta != null && respuesta is Person){
                       setState(() {
@@ -57,8 +57,11 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
+            Divider(),
             Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                Text("Personas: "),
                 for(Person p in _personas) _crearCard(p),
               ],
             ),
@@ -70,7 +73,20 @@ class _HomePageState extends State<HomePage> {
 
   _crearCard(Person p) {
     return Card(
-      child: Text(p.nombre),
+      elevation: 10,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30)
+      ),
+      child: Column(
+        children: [
+          ListTile(
+            leading: Icon(Icons.person),
+            title: Text("${p.nombre}  ${p.apellido}"),
+            subtitle: Text(p.email),
+            trailing: Text(p.edad),
+          )
+        ],
+      ),
     );
   }
 }
