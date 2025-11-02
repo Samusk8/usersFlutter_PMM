@@ -11,7 +11,7 @@ Programación Multimedia
 <p align="center">
   Aplicación móvil creada con <b>Flutter</b> para explorar y probar los <b>widgets básicos</b> del framework.  
   <br>
-  Un proyecto educativo y práctico para comprender el funcionamiento de los principales componentes de UI en Flutter.
+  Un proyecto educativo y práctico para prácticar el traspaso de información entre pestañas en Flutter y investigar nuevos Widgets.
 </p>
 
 <p align="center">
