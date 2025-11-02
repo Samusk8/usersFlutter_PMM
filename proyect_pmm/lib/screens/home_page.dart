@@ -58,11 +58,19 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             Column(
-
+              children: [
+                for(Person p in _personas) _crearCard(p),
+              ],
             ),
           ],
         ),
       ),
+    );
+  }
+
+  _crearCard(Person p) {
+    return Card(
+      child: Text(p.nombre),
     );
   }
 }
