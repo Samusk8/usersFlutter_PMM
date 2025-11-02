@@ -1,12 +1,16 @@
 class Person {
   String nombre;
-  int edad;
+  String apellido;
+  int? edad;
   String email;
+  String contrasena;
 
   Person({
     required this.nombre,
-    required this.edad,
+    required this.apellido,
+    this.edad,
     required this.email,
+    required this.contrasena
   });
 
   @override

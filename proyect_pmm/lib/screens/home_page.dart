@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
                 ElevatedButton(
                   child: Text('personal'),
                   onPressed: () async {
-                    final Person persona = Person(nombre: 'Samuel', edad: 19, email: 'Samuel@gmail.com');
+                    final Person persona = Person(nombre: 'Samuel', apellido: 'Jiménez', edad: 19, email: 'Samuel@gmail.com', contrasena: '1234abc');
                     final respuesta = await Navigator.pushNamed(context,'personal', arguments: persona);
                     if (respuesta != null && respuesta is Person){
                       setState(() {

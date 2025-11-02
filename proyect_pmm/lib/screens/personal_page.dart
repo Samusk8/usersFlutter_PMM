@@ -22,15 +22,20 @@ class _PersonalPageState extends State<PersonalPage> {
   late Person _persona;
 
   TextEditingController _nombreCtrl = TextEditingController();
+  TextEditingController _apellidoCtrl = TextEditingController();
   TextEditingController _edadCtrl = TextEditingController();
   TextEditingController _emailCtrl = TextEditingController();
+  TextEditingController _contrasenaCtrl = TextEditingController();
+  
 
 @override
 void initState() {
   super.initState();
   _nombreCtrl = TextEditingController();
+  _apellidoCtrl = TextEditingController();
   _edadCtrl = TextEditingController();
   _emailCtrl = TextEditingController();
+  _contrasenaCtrl = TextEditingController();
 }
 
   @override
@@ -42,8 +47,10 @@ void initState() {
     if (args != null && args is Person){
       _persona = args;
       _nombreCtrl.text = _persona.nombre;
+      _apellidoCtrl.text = _persona.apellido;
       //_edadCtrl.text = _persona.edad;  //no puedo meterle edad
       _emailCtrl.text = _persona.email;
+      _contrasenaCtrl.text = _persona.contrasena;
       
       print("Persona111111 ${_persona.toString()}");
 
@@ -113,6 +120,7 @@ void initState() {
   _crearApellido() {
     return TextField(
       //autofocus: true,
+      controller: _apellidoCtrl,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
         counter: Text('Letras ${_apellido.length}'),
@@ -183,6 +191,7 @@ void initState() {
 
   _crearPassword() {
     return TextField(
+      controller: _contrasenaCtrl,
       //autofocus: true,
       obscureText: true,
       decoration: InputDecoration(
