@@ -36,7 +36,30 @@ class _WidgetPageState extends State<WidgetPage> {
       body: Center(
         child: Column(
           children: [
-            
+            for (Person p in _personas) _crearCard(p)
+          ],
+        ),
+      ),
+    );
+  }
+
+    _crearCard(Person p) {
+    return Dismissible(
+      key: UniqueKey(),
+      onDismissed:(direction) {
+        setState(() {
+          _personas.remove(p);
+        });
+      },
+      child: Card(
+        child: Column(
+          children: [
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text("${p.nombre}  ${p.apellido}"),
+              subtitle: Text(p.email),
+              trailing: Text(p.edad),
+            )
           ],
         ),
       ),

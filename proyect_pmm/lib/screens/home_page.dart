@@ -19,10 +19,12 @@ class _HomePageState extends State<HomePage> {
   void initState(){
     super.initState;
     print("PERSONASSSSSS  $_personas");
+
   }
   
   @override
   Widget build(BuildContext context) {
+    for(Person p in _personas) _crearCard(p);
     return Scaffold(
       appBar: AppBar(
         title: Text("PF1"),
@@ -38,6 +40,10 @@ class _HomePageState extends State<HomePage> {
                   onPressed: () async {
                     final Person persona = Person(nombre: 'Samuel', apellido: 'Jiménez', edad: '', email: 'Samuel@gmail.com', contrasena: '1234abc');
                     final respuesta = await Navigator.pushNamed(context,'personal', arguments: persona);
+
+                    /*ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Añadida: ${persona.nombre}'), duration: Duration(seconds: 2))
+                    );*/
                     if (respuesta != null && respuesta is Person){
                       setState(() {
                         _personas.add(respuesta);
