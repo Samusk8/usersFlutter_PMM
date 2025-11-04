@@ -12,21 +12,25 @@ class WidgetPage extends StatefulWidget {
 class _WidgetPageState extends State<WidgetPage> {
 
   late List<Person> _personas;
+  late List<Person> _personasB;
   
   List<Person> get args => [];
 
   @override
   void initState(){
     super.initState();
-    List<Person> _personas = [];
+    _personas = [];
+    _personasB = [];
   }
 
   @override
   Widget build(BuildContext context) {
 
     final args = ModalRoute.of(context)!.settings.arguments as List<Person>;
-    _personas = args;
-
+    if (_personas.isEmpty && _personasB.isEmpty){
+      _personas = List<Person>.from(args);
+      _personasB = List<Person>.from(args);
+    }
     print("LISTA DE PERSONASSS${_personas}");
 
     return Scaffold(
@@ -36,13 +40,26 @@ class _WidgetPageState extends State<WidgetPage> {
       body: Center(
         child: Column(
           children: [
+            SearchBar(
+              onChanged: (value) {
+                setState(() {
+                  _personasB = 
+                  _personasB.where((p) => p.nombre.toLowerCase().contains(value.toLowerCase())).toList();
+                  for (Person p in _personasB) _crearCard(p);
+                  print("asdd${_personasB}");
+                      if (value.isEmpty){
+                        _personasB = _personas;
+                      }
+                });
+              },
+            ),
             Text("Eliminar personas"),
-            for (Person p in _personas) _crearCard(p),
+            for (Person p in _personasB) _crearCard(p),
             ElevatedButton(
               onPressed: () {
                 Navigator.pop(context, _personas);
               },
-              child: Text("Guardar")
+              child: Text("Guardar") 
             )
           ],
         ),
