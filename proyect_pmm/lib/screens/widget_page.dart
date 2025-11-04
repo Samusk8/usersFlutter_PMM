@@ -18,7 +18,7 @@ class _WidgetPageState extends State<WidgetPage> {
   @override
   void initState(){
     super.initState();
-    _personas = [];
+    List<Person> _personas = [];
   }
 
   @override
@@ -36,7 +36,14 @@ class _WidgetPageState extends State<WidgetPage> {
       body: Center(
         child: Column(
           children: [
-            for (Person p in _personas) _crearCard(p)
+            Text("Eliminar personas"),
+            for (Person p in _personas) _crearCard(p),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context, _personas);
+              },
+              child: Text("Guardar")
+            )
           ],
         ),
       ),

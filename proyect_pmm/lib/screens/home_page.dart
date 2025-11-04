@@ -13,7 +13,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  final List<Person> _personas = [];
+  List<Person> _personas = [];
 
   @override
   void initState(){
@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
   
   @override
   Widget build(BuildContext context) {
-    for(Person p in _personas) _crearCard(p);
+    //for(Person p in _personas) _crearCard(p);
     return Scaffold(
       appBar: AppBar(
         title: Text("PF1"),
@@ -58,6 +58,16 @@ class _HomePageState extends State<HomePage> {
                 ElevatedButton(
                   onPressed: () async {
                     final respuesta1 = await Navigator.pushNamed(context, 'widget', arguments: _personas);
+
+                    if (respuesta1 != null) {
+                      final List<Person> _personas1 = List<Person>.from(
+                        (respuesta1 as List).cast<Person>() 
+                      );
+                      setState(() {
+
+                        _personas = _personas1;
+                      });
+                    }
                   }, 
                   child: Text('Widgets')
                 ),
