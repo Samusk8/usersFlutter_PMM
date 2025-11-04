@@ -35,7 +35,7 @@ class _WidgetPageState extends State<WidgetPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Dissmis'),
+        title: Text('Dissmis - Buscador'),
       ),
       body: Center(
         child: Column(
@@ -45,7 +45,7 @@ class _WidgetPageState extends State<WidgetPage> {
                 setState(() {
                   _personasB = 
                   _personasB.where((p) => p.nombre.toLowerCase().contains(value.toLowerCase())).toList();
-                  for (Person p in _personasB) _crearCard(p);
+                  //for (Person p in _personasB) _crearCard(p);
                   print("asdd${_personasB}");
                       if (value.isEmpty){
                         _personasB = _personas;
@@ -73,6 +73,7 @@ class _WidgetPageState extends State<WidgetPage> {
       onDismissed:(direction) {
         setState(() {
           _personas.remove(p);
+          _personasB.remove(p);
         });
       },
       child: Card(
