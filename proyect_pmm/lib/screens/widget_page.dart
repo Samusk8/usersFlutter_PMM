@@ -38,30 +38,38 @@ class _WidgetPageState extends State<WidgetPage> {
         title: Text('Dissmis - Buscador'),
       ),
       body: Center(
-        child: Column(
-          children: [
-            SearchBar(
-              onChanged: (value) {
-                setState(() {
-                  _personasB = 
-                  _personasB.where((p) => p.nombre.toLowerCase().contains(value.toLowerCase())).toList();
-                  //for (Person p in _personasB) _crearCard(p);
-                  print("asdd${_personasB}");
-                      if (value.isEmpty){
-                        _personasB = _personas;
-                      }
-                });
-              },
-            ),
-            Text("Eliminar personas"),
-            for (Person p in _personasB) _crearCard(p),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context, _personas);
-              },
-              child: Text("Guardar") 
-            )
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            children: [
+              SearchBar(
+                leading: Icon(Icons.search),
+                hintText: "Buscar",
+                onChanged: (value) {
+                  setState(() {
+                    _personasB = 
+                    _personasB.where((p) => p.nombre.toLowerCase().contains(value.toLowerCase())).toList();
+                    //for (Person p in _personasB) _crearCard(p);
+                    print("asdd${_personasB}");
+                        if (value.isEmpty){
+                          _personasB = _personas;
+                        }
+                  });
+                },
+              ),
+              Padding(padding: EdgeInsetsGeometry.all(10)),
+              Text("Eliminar personas"),
+              Padding(padding: EdgeInsetsGeometry.all(10)),
+              for (Person p in _personasB) _crearCard(p),
+              Padding(padding: EdgeInsetsGeometry.all(10)),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context, _personas);
+                },
+                child: Text("Guardar") 
+              )
+            ],
+          ),
         ),
       ),
     );
