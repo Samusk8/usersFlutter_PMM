@@ -50,8 +50,8 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Padding(padding: EdgeInsetsGeometry.all(15)),
                 ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, 'widget');
+                  onPressed: () async {
+                    final respuesta1 = await Navigator.pushNamed(context, 'widget', arguments: _personas);
                   }, 
                   child: Text('Widgets')
                 ),
